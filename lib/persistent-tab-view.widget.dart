@@ -69,6 +69,8 @@ class PersistentTabView extends PersistentTabViewBase {
       required this.screens,
       this.controller,
       double navBarHeight = kBottomNavigationBarHeight,
+      double indicatorHeight = 4.0,
+      double indicatorWidthMargin = 0.0,
       this.margin = EdgeInsets.zero,
       this.backgroundColor = CupertinoColors.white,
       ValueChanged<int>? onItemSelected,
@@ -106,6 +108,8 @@ class PersistentTabView extends PersistentTabViewBase {
           popActionScreens: popActionScreens,
           popAllScreensOnTapOfSelectedTab: popAllScreensOnTapOfSelectedTab,
           navBarHeight: navBarHeight,
+          indicatorHeight: indicatorHeight,
+          indicatorWidthMargin: indicatorWidthMargin,
           backgroundColor: backgroundColor,
           onItemSelected: onItemSelected,
           neumorphicProperties: neumorphicProperties,
@@ -225,6 +229,10 @@ class PersistentTabViewBase extends StatefulWidget {
   ///Defaults to `kBottomNavigationBarHeight` which is `56.0`.
   final double? navBarHeight;
 
+  final double? indicatorHeight;
+
+  final double? indicatorWidthMargin;
+
   ///The margin around the navigation bar.
   final EdgeInsets? margin;
 
@@ -306,6 +314,8 @@ class PersistentTabViewBase extends StatefulWidget {
     this.navBarStyle,
     this.neumorphicProperties,
     this.navBarHeight,
+    this.indicatorHeight,
+    this.indicatorWidthMargin,
     this.customWidget,
     this.itemCount,
     this.popAllScreensOnTapOfSelectedTab,
@@ -584,11 +594,14 @@ class _PersistentTabViewState extends State<PersistentTabView> {
               selectedIndex: _controller!.index,
               previousIndex: _previousIndex,
               padding: widget.padding,
+              margin: widget.margin,
               selectedScreenBuildContext: _contextList[_controller!.index],
               itemAnimationProperties: widget.itemAnimationProperties,
               items: widget.items,
               backgroundColor: widget.backgroundColor,
               navBarHeight: _navBarHeight,
+              indicatorHeight: widget.indicatorHeight,
+              indicatorWidthMargin: widget.indicatorWidthMargin,
               popScreensOnTapOfSelectedTab:
                   widget.popAllScreensOnTapOfSelectedTab ?? true,
               onItemSelected: widget.onItemSelected != null

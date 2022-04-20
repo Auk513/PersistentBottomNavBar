@@ -8,9 +8,12 @@ class NavBarEssentials {
   final ValueChanged<int>? onItemSelected;
   final double? navBarHeight;
   final NavBarPadding? padding;
+  final EdgeInsets? margin;
   final bool? popScreensOnTapOfSelectedTab;
   final ItemAnimationProperties? itemAnimationProperties;
   final BuildContext? selectedScreenBuildContext;
+  final double? indicatorHeight;
+  final double? indicatorWidthMargin;
 
   const NavBarEssentials({
     Key? key,
@@ -23,7 +26,10 @@ class NavBarEssentials {
     required this.items,
     this.onItemSelected,
     this.padding,
+    this.margin,
     this.selectedScreenBuildContext,
+    this.indicatorHeight,
+    this.indicatorWidthMargin,
   });
 
   NavBarEssentials copyWith({
@@ -35,6 +41,7 @@ class NavBarEssentials {
     ValueChanged<int>? onItemSelected,
     double? navBarHeight,
     NavBarPadding? padding,
+    EdgeInsets? margin,
     Function(int)? popAllScreensForTheSelectedTab,
     bool? popScreensOnTapOfSelectedTab,
     ItemAnimationProperties? itemAnimationProperties,
@@ -47,6 +54,7 @@ class NavBarEssentials {
       onItemSelected: onItemSelected ?? this.onItemSelected,
       navBarHeight: navBarHeight ?? this.navBarHeight,
       padding: padding ?? this.padding,
+      margin: margin ?? this.margin,
       popScreensOnTapOfSelectedTab:
           popScreensOnTapOfSelectedTab ?? this.popScreensOnTapOfSelectedTab,
       itemAnimationProperties:

@@ -93,8 +93,12 @@ class BottomNavStyle3 extends StatelessWidget {
             ((this.navBarEssentials!.padding?.left ??
                     MediaQuery.of(context).size.width * 0.05) +
                 (this.navBarEssentials!.padding?.right ??
-                    MediaQuery.of(context).size.width * 0.05))) /
+                    MediaQuery.of(context).size.width * 0.05) +
+                (this.navBarEssentials!.margin?.left ?? 0.0) +
+                (this.navBarEssentials!.margin?.right ?? 0.0))) /
         this.navBarEssentials!.items!.length);
+    double indicatorWidth =
+        itemWidth - ((this.navBarEssentials!.indicatorWidthMargin ?? 0) * 2);
     return Container(
       width: double.infinity,
       height: this.navBarEssentials!.navBarHeight,
@@ -118,9 +122,11 @@ class BottomNavStyle3 extends StatelessWidget {
                     Curves.ease,
                 color: Colors.transparent,
                 width: this.navBarEssentials!.selectedIndex == 0
-                    ? MediaQuery.of(context).size.width * 0.0
-                    : itemWidth * this.navBarEssentials!.selectedIndex!,
-                height: 4.0,
+                    ? MediaQuery.of(context).size.width * 0.0 +
+                        (this.navBarEssentials!.indicatorWidthMargin ?? 0.0)
+                    : itemWidth * this.navBarEssentials!.selectedIndex! +
+                        (this.navBarEssentials!.indicatorWidthMargin ?? 0.0),
+                height: this.navBarEssentials!.indicatorHeight ?? 4.0,
               ),
               Flexible(
                 child: AnimatedContainer(
@@ -132,12 +138,14 @@ class BottomNavStyle3 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  width: itemWidth,
-                  height: 4.0,
+                  width: indicatorWidth,
+                  height: this.navBarEssentials!.indicatorHeight ?? 4.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: selectedItemActiveColor,
-                    borderRadius: BorderRadius.circular(100.0),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(100.0),
+                        bottomRight: Radius.circular(100.0)),
                   ),
                 ),
               )
