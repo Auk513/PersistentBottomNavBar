@@ -228,6 +228,8 @@ class PersistentTabViewBase extends StatefulWidget {
     this.navBarStyle,
     this.neumorphicProperties,
     this.navBarHeight,
+    this.indicatorHeight,
+    this.indicatorWidthMargin,
     this.customWidget,
     this.itemCount,
     this.popAllScreensOnTapOfSelectedTab,
