@@ -78,12 +78,16 @@ class BottomNavStyle3 extends StatelessWidget {
   Widget build(final BuildContext context) {
     final Color selectedItemActiveColor = navBarEssentials!
         .items![navBarEssentials!.selectedIndex!].activeColorPrimary;
-    final double itemWidth = (MediaQuery.of(context).size.width -
-            ((navBarEssentials!.padding?.left ??
+    final double itemWidth = ((MediaQuery.of(context).size.width -
+            ((this.navBarEssentials!.padding?.left ??
                     MediaQuery.of(context).size.width * 0.05) +
-                (navBarEssentials!.padding?.right ??
-                    MediaQuery.of(context).size.width * 0.05))) /
-        navBarEssentials!.items!.length;
+                (this.navBarEssentials!.padding?.right ??
+                    MediaQuery.of(context).size.width * 0.05) +
+                (this.navBarEssentials!.margin?.left ?? 0.0) +
+                (this.navBarEssentials!.margin?.right ?? 0.0))) /
+        this.navBarEssentials!.items!.length);
+    final double indicatorWidth =
+        itemWidth - ((this.navBarEssentials!.indicatorWidthMargin ?? 0) * 2);
     return Container(
       width: double.infinity,
       height: navBarEssentials!.navBarHeight,
@@ -105,10 +109,12 @@ class BottomNavStyle3 extends StatelessWidget {
                 curve: navBarEssentials!.itemAnimationProperties?.curve ??
                     Curves.ease,
                 color: Colors.transparent,
-                width: navBarEssentials!.selectedIndex == 0
-                    ? MediaQuery.of(context).size.width * 0.0
-                    : itemWidth * navBarEssentials!.selectedIndex!,
-                height: 4,
+                width: this.navBarEssentials!.selectedIndex == 0
+                    ? MediaQuery.of(context).size.width * 0.0 +
+                        (this.navBarEssentials!.indicatorWidthMargin ?? 0.0)
+                    : itemWidth * this.navBarEssentials!.selectedIndex! +
+                        (this.navBarEssentials!.indicatorWidthMargin ?? 0.0),
+                height: this.navBarEssentials!.indicatorHeight ?? 4.0,
               ),
               Flexible(
                 child: AnimatedContainer(
@@ -117,12 +123,14 @@ class BottomNavStyle3 extends StatelessWidget {
                           const Duration(milliseconds: 300),
                   curve: navBarEssentials!.itemAnimationProperties?.curve ??
                       Curves.ease,
-                  width: itemWidth,
-                  height: 4,
+                  width: indicatorWidth,
+                  height: this.navBarEssentials!.indicatorHeight ?? 4.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: selectedItemActiveColor,
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(100.0),
+                        bottomRight: Radius.circular(100.0)),
                   ),
                 ),
               )

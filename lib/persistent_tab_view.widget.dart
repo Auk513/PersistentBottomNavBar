@@ -16,6 +16,8 @@ class PersistentTabView extends PersistentTabViewBase {
       final List<PersistentBottomNavBarItem>? items,
       this.controller,
       final double navBarHeight = kBottomNavigationBarHeight,
+      final double indicatorHeight = 4.0,
+      final double indicatorWidthMargin = 0.0,
       this.margin = EdgeInsets.zero,
       this.backgroundColor = CupertinoColors.white,
       final ValueChanged<int>? onItemSelected,
@@ -65,6 +67,8 @@ class PersistentTabView extends PersistentTabViewBase {
           popAllScreensOnTapOfSelectedTab: popAllScreensOnTapOfSelectedTab,
           popAllScreensOnTapAnyTabs: popAllScreensOnTapAnyTabs,
           navBarHeight: navBarHeight,
+          indicatorHeight: indicatorHeight,
+          indicatorWidthMargin: indicatorWidthMargin,
           backgroundColor: backgroundColor,
           onItemSelected: onItemSelected,
           neumorphicProperties: neumorphicProperties,
@@ -275,6 +279,10 @@ class PersistentTabViewBase extends StatefulWidget {
   ///
   ///Defaults to `kBottomNavigationBarHeight` which is `56.0`.
   final double? navBarHeight;
+
+  final double? indicatorHeight;
+
+  final double? indicatorWidthMargin;
 
   ///The margin around the navigation bar.
   final EdgeInsets? margin;
@@ -599,11 +607,14 @@ class _PersistentTabViewState extends State<PersistentTabView> {
             selectedIndex: _controller!.index,
             previousIndex: _previousIndex,
             padding: widget.padding,
+            margin: widget.margin,
             selectedScreenBuildContext: _contextList[_controller!.index],
             itemAnimationProperties: widget.itemAnimationProperties,
             items: widget.items,
             backgroundColor: widget.backgroundColor,
             navBarHeight: _navBarHeight,
+            indicatorHeight: widget.indicatorHeight,
+            indicatorWidthMargin: widget.indicatorWidthMargin,
             popScreensOnTapOfSelectedTab:
                 widget.popAllScreensOnTapOfSelectedTab ?? true,
             popAllScreensOnTapAnyTabs:
